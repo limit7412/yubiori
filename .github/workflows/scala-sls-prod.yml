@@ -1,4 +1,4 @@
-name: dart-sls
+name: scala-sls
 
 on:
   push:
