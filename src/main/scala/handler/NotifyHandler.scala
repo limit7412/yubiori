@@ -1,21 +1,21 @@
 package handler
 
-import models.aws.lambda.runtime
+import models.aws.lambda
 
 import com.amazonaws.services.lambda.runtime.{Context, RequestHandler}
 import org.apache.logging.log4j.{LogManager, Logger}
 
 import scala.jdk.CollectionConverters._
 
-class Notify extends RequestHandler[runtime.Request, runtime.Response] {
+class Notify extends RequestHandler[lambda.Request, lambda.Response] {
 
   val logger: Logger = LogManager.getLogger(getClass)
 
   def handleRequest(
-      input: runtime.Request,
+      input: lambda.Request,
       context: Context
-  ): runtime.Response = {
+  ): lambda.Response = {
     logger.info(s"Received a request: $input")
-    runtime.Response("たべるんご！", input)
+    lambda.Response("たべるんご！", input)
   }
 }

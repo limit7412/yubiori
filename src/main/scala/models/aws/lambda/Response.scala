@@ -1,4 +1,4 @@
-package models.aws.lambda.runtime
+package models.aws.lambda
 
 import scala.beans.BeanProperty
 
