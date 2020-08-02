@@ -19,9 +19,9 @@ functions:
   notify:
     handler: handler.Notify
 
-  api:
-    handler: handler.Get
+  command:
+    handler: handler.Command
     events:
       - http:
-          path: yubiori/v1/get
-          method: get
+          path: yubiori/v1/command
+          method: post
