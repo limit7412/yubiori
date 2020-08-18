@@ -12,7 +12,7 @@ case class SlashCommand(
     @BeanProperty var userID: String = "",
     @BeanProperty var userName: String = "",
     @BeanProperty var command: String = "",
-    @BeanProperty var text: String = "",
+    @BeanProperty var text: Array[String] = null,
     @BeanProperty var responseURL: String = "",
     @BeanProperty var triggerID: String = ""
 )
@@ -36,7 +36,7 @@ object SlashCommand {
       list("user_id"),
       list("user_name"),
       list("command"),
-      list("text"),
+      list("text").split(" "),
       list("response_url"),
       list("trigger_id")
     )

@@ -21,7 +21,7 @@ class Command
     val request = slack.SlashCommand.parse(input.body)
     val attachments = new slack.Attachments(
       title = "test",
-      text = request.text
+      text = request.text.mkString(",")
     )
     val headers = Map(
       "x-custom-response-header" -> "my custom response header value"
