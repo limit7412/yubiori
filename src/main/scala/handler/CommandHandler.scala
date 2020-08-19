@@ -19,9 +19,10 @@ class Command
       context: Context
   ): lambda.ApiGatewayResponse = {
     val request = slack.SlashCommand.parse(input.body)
+    val txt = request.text.mkString(",")
     val attachments = new slack.Attachments(
       title = "test",
-      text = request.text.mkString(",")
+      text = s"input txt: $txt"
     )
     val headers = Map(
       "x-custom-response-header" -> "my custom response header value"

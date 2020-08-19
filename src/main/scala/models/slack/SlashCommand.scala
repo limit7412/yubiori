@@ -23,7 +23,10 @@ object SlashCommand {
       .split('&')
       .map(item => {
         val kv = item.split('=')
-        Map(kv(0) -> URLDecoder.decode(kv(1), "UTF-8"))
+        kv.size match {
+          case 1 =>  Map(kv(0) -> "")
+          case _ =>  Map(kv(0) -> URLDecoder.decode(kv(1), "UTF-8"))
+        }
       })
       .reduceLeft(_ ++ _)
 
