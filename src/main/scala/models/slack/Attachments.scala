@@ -10,7 +10,9 @@ class Attachments(
     @BeanProperty var authorLink: String = "",
     @BeanProperty var title: String = "",
     @BeanProperty var titleLink: String = "",
+    @BeanProperty var pretext: String = "",
     @BeanProperty var text: String = "",
+    @BeanProperty var color: String = "",
     @BeanProperty var footer: String = "",
     @BeanProperty var footerIcon: String = ""
 ) {
@@ -22,10 +24,24 @@ class Attachments(
       "author_link" -> fromString(authorLink),
       "title" -> fromString(title),
       "titleLink" -> fromString(titleLink),
+      "pretext" -> fromString(pretext),
       "text" -> fromString(text),
+      "color" -> fromString(color),
       "author_name" -> fromString(authorName),
       "footer" -> fromString(footer),
       "footer_icon" -> fromString(footerIcon)
+    )
+
+    json.toString()
+  }
+}
+
+class Payload(
+    @BeanProperty var attachments: Array[Attachments] = Array.empty
+) {
+  override def toString: String = {
+    val json = obj(
+      "attachments" -> fromString(attachments.toString())
     )
 
     json.toString()

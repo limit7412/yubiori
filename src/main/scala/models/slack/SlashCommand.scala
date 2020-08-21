@@ -12,7 +12,7 @@ case class SlashCommand(
     @BeanProperty var userID: String = "",
     @BeanProperty var userName: String = "",
     @BeanProperty var command: String = "",
-    @BeanProperty var text: Array[String] = null,
+    @BeanProperty var text: Array[String] = Array.empty,
     @BeanProperty var responseURL: String = "",
     @BeanProperty var triggerID: String = ""
 )
@@ -24,8 +24,8 @@ object SlashCommand {
       .map(item => {
         val kv = item.split('=')
         kv.size match {
-          case 1 =>  Map(kv(0) -> "")
-          case _ =>  Map(kv(0) -> URLDecoder.decode(kv(1), "UTF-8"))
+          case 1 => Map(kv(0) -> "")
+          case _ => Map(kv(0) -> URLDecoder.decode(kv(1), "UTF-8"))
         }
       })
       .reduceLeft(_ ++ _)
