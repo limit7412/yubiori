@@ -16,6 +16,10 @@ libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-lambda-java-log4j2" % "1.1.0"
 )
 
+libraryDependencies ++= Seq(
+  "com.softwaremill.sttp.client" %% "core" % "2.2.5"
+)
+
 val circeVersion = "0.12.3"
 
 libraryDependencies ++= Seq(
