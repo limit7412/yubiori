@@ -2,8 +2,7 @@ package repository
 
 import models.slack
 
-import com.softwaremill.sttp._
-
+import sttp.client._
 import scala.concurrent.duration._
 
 object Slack {
@@ -11,11 +10,12 @@ object Slack {
       webhook: String,
       payload: slack.Payload
   ): String = {
-    val request = sttp
-      .method(Method.POST, uri"$webhook")
+    implicit val backend = HttpURLConnectionBackend()
+    val res = basicRequest
       .body(payload.toString())
-    val response = request.send()
+      .post(uri"$webhook")
+      .send()
 
-    ""
+    res.body.toString()
   }
 }

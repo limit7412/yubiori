@@ -1,7 +1,8 @@
 package models.slack
 
 import scala.beans.BeanProperty
-import io.circe.Json._
+import org.json4s.jackson.JsonMethods._
+import org.json4s.JsonDSL._
 
 class Attachments(
     @BeanProperty var fallback: String = "",
@@ -17,33 +18,49 @@ class Attachments(
     @BeanProperty var footerIcon: String = ""
 ) {
   override def toString: String = {
-    val json = obj(
-      "fallback" -> fromString(fallback),
-      "author_name" -> fromString(authorName),
-      "author_icon" -> fromString(authorIcon),
-      "author_link" -> fromString(authorLink),
-      "title" -> fromString(title),
-      "titleLink" -> fromString(titleLink),
-      "pretext" -> fromString(pretext),
-      "text" -> fromString(text),
-      "color" -> fromString(color),
-      "author_name" -> fromString(authorName),
-      "footer" -> fromString(footer),
-      "footer_icon" -> fromString(footerIcon)
+    compact(
+      render(
+        ("fallback" -> fallback) ~
+          ("author_name" -> authorName) ~
+          ("author_icon" -> authorIcon) ~
+          ("author_link" -> authorLink) ~
+          ("title" -> title) ~
+          ("titleLink" -> titleLink) ~
+          ("pretext" -> pretext) ~
+          ("text" -> text) ~
+          ("color" -> color) ~
+          ("author_name" -> authorName) ~
+          ("footer" -> footer) ~
+          ("footer_icon" -> footerIcon)
+      )
     )
-
-    json.toString()
   }
 }
 
 class Payload(
-    @BeanProperty var attachments: Array[Attachments] = Array.empty
+    @BeanProperty var attachments: Seq[Attachments] = Seq.empty
 ) {
   override def toString: String = {
-    val json = obj(
-      "attachments" -> fromString(attachments.toString())
+    compact(
+      render(
+        (
+          "attachments" -> attachments
+            .map { item =>
+              ("fallback" -> item.fallback) ~
+                ("author_name" -> item.authorName) ~
+                ("author_icon" -> item.authorIcon) ~
+                ("author_link" -> item.authorLink) ~
+                ("title" -> item.title) ~
+                ("titleLink" -> item.titleLink) ~
+                ("pretext" -> item.pretext) ~
+                ("text" -> item.text) ~
+                ("color" -> item.color) ~
+                ("author_name" -> item.authorName) ~
+                ("footer" -> item.footer) ~
+                ("footer_icon" -> item.footerIcon)
+            }
+        )
+      )
     )
-
-    json.toString()
   }
 }

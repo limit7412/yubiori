@@ -17,7 +17,8 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "com.softwaremill.sttp.client" %% "core" % "2.2.5"
+  "com.softwaremill.sttp.client" %% "core" % "2.2.5",
+  "org.json4s" %% "json4s-jackson" % "3.6.9"
 )
 
 val circeVersion = "0.12.3"
