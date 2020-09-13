@@ -38,12 +38,7 @@ class Command
     } catch {
       case e: Exception => {
         usecase.Error.notify(e)
-        lambda.ApiGatewayResponse(
-          500,
-          "internal backend error",
-          Map().asJava,
-          true
-        )
+        throw e
       }
     }
 
